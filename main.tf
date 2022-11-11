@@ -7,13 +7,19 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    resource_group_name   = "fsdevop-infra"
-    storage_account_name  = "fsdevoptstate"
-    container_name        = "tstate"
-    key                   = "+uRmL73LSnXvSEGMG9pd26R28qvgFS9z3BcZrg+NHAExrs9HkRhOjNGWxT9c/J0iDcwF2t+txjCf0ZfDayV6pw=="
-  }
-
+//  backend "azurerm" {
+//    resource_group_name = "fsdevop-infra"
+//    storage_account_name = "fsdevoptstate"
+//    container_name = "tstate"
+//    key = "+uRmL73LSnXvSEGMG9pd26R28qvgFS9z3BcZrg+NHAExrs9HkRhOjNGWxT9c/J0iDcwF2t+txjCf0ZfDayV6pw=="
+//  }
+//
+  //  │ Error: checking for presence of existing resource group: resources.GroupsClient
+  #Get: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error.
+  // Status=403 Code="AuthorizationFailed" Message="The client 'ffb0aee1-7a3a-49ee-9f05-7fcfdac9a4df'
+  // with object id 'ffb0aee1-7a3a-49ee-9f05-7fcfdac9a4df' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope
+  // '/subscriptions/76e92d8f-9793-4ec6-b1a7-c13660ee5293/resourcegroups/fsdevop-app01' or
+  // the scope is invalid. If access was recently granted, please refresh your credentials."
 }
 provider "azurerm" {
   features {
