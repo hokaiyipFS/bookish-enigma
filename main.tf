@@ -26,7 +26,7 @@ data "azurerm_client_config" "current" {}
 # Create our Resource Group - FSdevops-RG
 resource "azurerm_resource_group" "rg" {
   name = "fsdevop-app01"
-  location = "UK South"
+  location = "eastus"
 }
 # Create our Virtual Network - FSdevops-VNET
 resource "azurerm_virtual_network" "vnet" {
