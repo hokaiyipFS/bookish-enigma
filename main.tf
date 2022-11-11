@@ -7,18 +7,18 @@ terraform {
     }
   }
 
-//  backend "azurerm" {
-//    resource_group_name = "fsdevop-infra"
-//    storage_account_name = "fsdevoptstate"
-//    container_name = "tstate"
-//    key = "+uRmL73LSnXvSEGMG9pd26R28qvgFS9z3BcZrg+NHAExrs9HkRhOjNGWxT9c/J0iDcwF2t+txjCf0ZfDayV6pw=="
-//  }
-//
+  backend "azurerm" {
+    resource_group_name = "fsdevops-infra"
+    storage_account_name = "fsdevopststate"
+    container_name = "tstate"
+    key = "l3bDwx6Er+R0bHu5AsGKPMWIAsBYQE4doeavhmwnJZO2xqYcdoCXOVskXxCrPryDwyqLq3aQvtMg+AStwnFBxA=="
+  }
+
   //  │ Error: checking for presence of existing resource group: resources.GroupsClient
   #Get: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error.
   // Status=403 Code="AuthorizationFailed" Message="The client 'ffb0aee1-7a3a-49ee-9f05-7fcfdac9a4df'
   // with object id 'ffb0aee1-7a3a-49ee-9f05-7fcfdac9a4df' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope
-  // '/subscriptions/76e92d8f-9793-4ec6-b1a7-c13660ee5293/resourcegroups/fsdevop-app01' or
+  // '/subscriptions/76e92d8f-9793-4ec6-b1a7-c13660ee5293/resourcegroups/fsdevops-app01' or
   // the scope is invalid. If access was recently granted, please refresh your credentials."
 }
 provider "azurerm" {
@@ -31,12 +31,12 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {}
 # Create our Resource Group - FSdevops-RG
 resource "azurerm_resource_group" "rg" {
-  name = "fsdevop-app01"
+  name = "fsdevops-app01"
   location = "eastus"
 }
 # Create our Virtual Network - FSdevops-VNET
 resource "azurerm_virtual_network" "vnet" {
-  name = "fsdevopvnet"
+  name = "fsdevopsvnet"
   address_space = [
     "10.0.0.0/16"]
   location = azurerm_resource_group.rg.location
@@ -50,20 +50,20 @@ resource "azurerm_subnet" "sn" {
   address_prefixes = [
     "10.0.1.0/24"]
 }
-# Create our Azure Storage Account - fsdevopsa
-resource "azurerm_storage_account" "fsdevopsa" {
-  name = "fsdevopsa"
+# Create our Azure Storage Account - fsdevopssa
+resource "azurerm_storage_account" "fsdevopssa" {
+  name = "fsdevopssa"
   resource_group_name = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
   account_tier = "Standard"
   account_replication_type = "LRS"
   tags = {
-    environment = "fsdevoprox"
+    environment = "fsdevopsrox"
   }
 }
 # Create our vNIC for our VM and assign it to our Virtual Machines Subnet
 resource "azurerm_network_interface" "vmnic" {
-  name = "fsdevopvm01nic"
+  name = "fsdevopsvm01nic"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
@@ -74,8 +74,8 @@ resource "azurerm_network_interface" "vmnic" {
   }
 }
 # Create our Virtual Machine - FSdevops-VM01
-resource "azurerm_virtual_machine" "fsdevopvm01" {
-  name = "fsdevopvm01"
+resource "azurerm_virtual_machine" "fsdevopsvm01" {
+  name = "fsdevopsvm01"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   network_interface_ids = [
@@ -88,14 +88,14 @@ resource "azurerm_virtual_machine" "fsdevopvm01" {
     version = "latest"
   }
   storage_os_disk {
-    name = "fsdevopvm01os"
+    name = "fsdevopsvm01os"
     caching = "ReadWrite"
     create_option = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name = "fsdevopvm01"
-    admin_username = "fsdevop"
+    computer_name = "fsdevopsvm01"
+    admin_username = "fsdevops"
     admin_password = "Password123$"
   }
   os_profile_windows_config {
