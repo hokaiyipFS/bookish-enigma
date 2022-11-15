@@ -7,19 +7,13 @@ terraform {
     }
   }
 
-//  backend "azurerm" {
-//    resource_group_name = "fsdevops-infra"
-//    storage_account_name = "fsdevopststate"
-//    container_name = "tstate"
-//    key = "l3bDwx6Er+R0bHu5AsGKPMWIAsBYQE4doeavhmwnJZO2xqYcdoCXOVskXxCrPryDwyqLq3aQvtMg+AStwnFBxA=="
-//  }
+  backend "azurerm" {
+    resource_group_name = "fsdevops-infra"
+    storage_account_name = "fsdevopststate"
+    container_name = "tstate"
+    key = "JzDEm0M9J/j3DyRYgBmWsws/ZxFoSJc0kiUnlBe/POFLuBGOIJE3ObiuyBMh9Y3OlEg5/4Qxcw8j+AStUquPnA=="
+  }
 
-  //  │ Error: checking for presence of existing resource group: resources.GroupsClient
-  #Get: Failure responding to request: StatusCode=403 -- Original Error: autorest/azure: Service returned an error.
-  // Status=403 Code="AuthorizationFailed" Message="The client 'ffb0aee1-7a3a-49ee-9f05-7fcfdac9a4df'
-  // with object id 'ffb0aee1-7a3a-49ee-9f05-7fcfdac9a4df' does not have authorization to perform action 'Microsoft.Resources/subscriptions/resourcegroups/read' over scope
-  // '/subscriptions/76e92d8f-9793-4ec6-b1a7-c13660ee5293/resourcegroups/fsdevops-app01' or
-  // the scope is invalid. If access was recently granted, please refresh your credentials."
 }
 provider "azurerm" {
   features {
@@ -86,7 +80,7 @@ resource "azurerm_service_plan" "appserviceplan" {
 
 # Create the web app, pass in the App Service Plan ID
 resource "azurerm_linux_web_app" "webapp" {
-  name = "myphpWebapp2022"
+  name = "fsdevopsWebapp2022"
   location = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   service_plan_id = azurerm_service_plan.appserviceplan.id
