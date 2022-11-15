@@ -21,6 +21,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
+    commandOptions: '-migrate-state'
     backendServiceArm: 'fsdevops-TFSPN'
     backendAzureRmResourceGroupName: 'fsdevops-infra'
     backendAzureRmStorageAccountName: 'fsdevopststate'
