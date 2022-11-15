@@ -16,9 +16,10 @@ steps:
   inputs:
     terraformVersion: 'latest'
   displayName: 'Run a one-line script'
-  
+
 - task: TerraformTaskV3@3
   inputs:
+    runAzLogin: true
     provider: 'azurerm'
     command: 'init'
     commandOptions: '-migrate-state'
@@ -32,11 +33,13 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
+    runAzLogin: true
     environmentServiceNameAzureRM: 'fsdevops-TFSPN'
-    
-    
+
+
 - task: TerraformTaskV3@3
   inputs:
     provider: 'azurerm'
     command: 'apply'
     environmentServiceNameAzureRM: 'fsdevops-TFSPN'
+    runAzLogin: true
