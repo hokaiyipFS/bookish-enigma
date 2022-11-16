@@ -11,7 +11,7 @@ terraform {
     resource_group_name = "fsdevops-infra"
     storage_account_name = "fsdevopststate"
     container_name = "tstate"
-    key = "JzDEm0M9J/j3DyRYgBmWsws/ZxFoSJc0kiUnlBe/POFLuBGOIJE3ObiuyBMh9Y3OlEg5/4Qxcw8j+AStUquPnA=="
+    key = "terraform.tfstate"
   }
 
 }
