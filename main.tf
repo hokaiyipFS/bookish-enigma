@@ -8,7 +8,7 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name = "fsdevops-infra"
+    resource_group_name = "fsdevops-app01"
     storage_account_name = "fsdevopststate"
     container_name = "tstate"
     key = "terraform.tfstate"

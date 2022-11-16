@@ -1,5 +1,5 @@
 #!/bin/bash
-RESOURCE_GROUP_NAME=fsdevops-infra
+RESOURCE_GROUP_NAME=fsdevops-app01
 STORAGE_ACCOUNT_NAME=fsdevopststate
 CONTAINER_NAME=tstate
 # Create resource group
