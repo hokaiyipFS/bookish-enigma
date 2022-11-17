@@ -90,6 +90,9 @@ resource "azurerm_linux_web_app" "webapp" {
     minimum_tls_version = "1.2"
 
   }
+  tags = {
+    environment = "fsdevopsrox2"
+  }
   app_settings = {
     "WEBSITE_DNS_SERVER": "168.63.129.16",
     "WEBSITE_VNET_ROUTE_ALL": "1"
@@ -100,6 +103,6 @@ resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id = azurerm_linux_web_app.webapp.id
   repo_url = "https://github.com/hokaiyipFS/php-docs-hello-world"
   branch = "main"
-  use_manual_integration = false
+  use_manual_integration = true
   use_mercurial = false
 }
