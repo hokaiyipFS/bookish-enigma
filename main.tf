@@ -88,13 +88,17 @@ resource "azurerm_linux_web_app" "webapp" {
   https_only = true
   site_config {
     minimum_tls_version = "1.2"
+    http2_enabled = true
   }
+
+
   tags = {
     environment = "fsdevopsrox3"
   }
+
   app_settings = {
     "WEBSITE_DNS_SERVER": "168.63.129.16",
-    "WEBSITE_VNET_ROUTE_ALL": "1"
+    "WEBSITE_VNET_ROUTE_ALL": "1",
   }
 }
 
@@ -102,6 +106,6 @@ resource "azurerm_app_service_source_control" "sourcecontrol" {
   app_id = azurerm_linux_web_app.webapp.id
   repo_url = "https://dev.azure.com/hokaiyip/_git/Terraform-Testing2"
   branch = "main"
-  use_manual_integration = true
+  use_manual_integration = false
   use_mercurial = false
 }
