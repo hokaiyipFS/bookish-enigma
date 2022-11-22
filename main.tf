@@ -108,4 +108,5 @@ resource "azurerm_app_service_source_control" "sourcecontrol" {
   branch = "main"
   use_manual_integration = true
   use_mercurial = false
+  rollback_enabled = true
 }
